@@ -1,21 +1,29 @@
 <?php get_header(); ?>
 
 <div class="index">
+	<?php
+	$slider_posts__arr = array_map('trim', explode(',', carbon_get_theme_option('crb_sidebar_posts')));
+    ?>
 	<?php $slider = new WP_Query([
-		'post_type' => 'slider',
+		'post_type' => 'post',
+		'post__in' => $slider_posts__arr,
 		'posts_per_page' => -1
 	]); ?>
 
 	<?php if ($slider->have_posts()): ?>
         <div class="slider-wrap">
-            <h1 class="slider-title"><?php the_field('index_slider_title', 176); ?></h1>
             <div class="slider" id="js-slider">
 				<?php while ($slider->have_posts()): ?>
 					<?php $slider->the_post(); ?>
                     <div class="slider__item">
+                        <h1 class="slider-title">
+                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        </h1>
+
                         <img src="<?php echo kama_thumb_src('w=1300 &h=600') ?>" alt="">
                     </div>
 				<?php endwhile; ?>
+                <?php wp_reset_postdata(); ?>
             </div>
         </div>
 	<?php else: ?>
@@ -53,10 +61,8 @@
                     </h2>
 					<?php
 					$publications_count = carbon_get_theme_option('crb_pulications_count');
-					$publication = new WP_Query([
-						'posts_per_page' => $publications_count,
-						'cat' => 32
-					]);
+					$publication = new WP_Query(['posts_per_page' => $publications_count,
+						'cat' => 32]);
 					?>
 					<?php if ($publication->have_posts()): ?>
                         <div class="publications">
@@ -87,10 +93,8 @@
                     <h2 class="section__title"><?php the_field('index_projects', 176); ?></h2>
 					<?php
 					$projects_count = carbon_get_theme_option('crb_projects_count');
-					$project = new WP_Query([
-						'posts_per_page' => $projects_count,
-						'cat' => 25
-					]);
+					$project = new WP_Query(['posts_per_page' => $projects_count,
+						'cat' => 25]);
 					?>
 					<?php if ($project->have_posts()): ?>
                         <div class="publications">
@@ -121,10 +125,8 @@
                     <h2 class="section__title"><?php the_field('last_publications_from_index', 176); ?></h2>
 					<?php
 					$last_posts_count = carbon_get_theme_option('crb_last_posts_count');
-					$publication = new WP_Query([
-						'posts_per_page' => $last_posts_count,
-						'cat' => '32,25'
-					]);
+					$publication = new WP_Query(['posts_per_page' => $last_posts_count,
+						'cat' => '32,25']);
 					?>
 					<?php if ($publication->have_posts()): ?>
                         <div class="publications last-posts">
@@ -151,14 +153,14 @@
                     <h2 class="section__title"><?php echo carbon_get_theme_option('crb_sponsors_title' . get_lang()) ?></h2>
 
                     <div class="donors">
-				        <?php $images = carbon_get_theme_option('crb_sponsors_images'); ?>
-				        <?php foreach ($images as $image): ?>
+						<?php $images = carbon_get_theme_option('crb_sponsors_images'); ?>
+						<?php foreach ($images as $image): ?>
                             <div class="donors__item">
                                 <a href="<?php echo $image['crb_sponsors_link']; ?>" target="_blank">
-							        <?php echo wp_get_attachment_image($image['crb_sponsors_image']); ?>
+									<?php echo wp_get_attachment_image($image['crb_sponsors_image']); ?>
                                 </a>
                             </div>
-				        <?php endforeach; ?>
+						<?php endforeach; ?>
                     </div>
                 </div>
             </div>

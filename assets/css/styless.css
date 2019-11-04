@@ -810,9 +810,13 @@ footer .adresone, footer .adrestwo {
 	transform: translate(-50%, -50%);
 	font-size: 44px;
 	font-weight: bold;
+	text-align: center;
 	color: white;
-	/*text-transform: uppercase;*/
 	z-index: 20000;
+}
+
+.slider-wrap .slider-title a {
+	color: yellow;
 }
 
 .slider-wrap .slider__item {

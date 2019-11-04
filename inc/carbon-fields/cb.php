@@ -8,7 +8,7 @@ use Carbon_Fields\Field;
 add_action('carbon_fields_register_fields', 'crb_attach_theme_options');
 function crb_attach_theme_options()
 {
-	Container::make('theme_options', __('Theme Options'))
+	Container::make('theme_options', __('Carbon Fields'))
 		->add_tab('Колличество картинок на главной', array(
 			Field::make('text', 'crb_pulications_count', 'Число публикаций')
 				->set_width(30),
@@ -38,11 +38,8 @@ function crb_attach_theme_options()
 				))
 				->set_layout('tabbed-horizontal'),
 		))
-		->add_tab('Sidebar title', array(
-			Field::make('text', 'crb_sidebar_title_ro', 'Sidebar title Ro')
-			->set_width(50),
-			Field::make('text', 'crb_sidebar_title_ru', 'Sidebar title Ru')
-			->set_width(50),
+		->add_tab('Sidebar posts', array(
+			Field::make('text', 'crb_sidebar_posts', 'Sidebar posts id')
 		));
 }
 
