@@ -805,19 +805,39 @@ footer .adresone, footer .adrestwo {
 
 .slider-wrap .slider-title {
 	position: absolute;
-	top: 43%;
+	bottom: 0;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	margin-bottom: 0;
+	padding: 30px;
+	width: 100%;
+	transform: translateX(-50%);
 	font-size: 44px;
 	font-weight: bold;
 	text-align: center;
 	color: white;
 	z-index: 20000;
+	background: rgba(0,0,0,.4);
 }
 
 .slider-wrap .slider-title a {
 	color: yellow;
 }
+@media screen and (max-width: 992px) {
+	.slider-wrap .slider-title a {
+		font-size: 24px;
+	}
+}
+@media screen and (max-width: 578px) {
+	.slider-wrap .slider-title {
+		padding: 10px;
+		font-size: 20px;
+	}
+	.slick-arrow {
+		display: none !important;
+	}
+}
+
+
 
 .slider-wrap .slider__item {
 	position: relative;
